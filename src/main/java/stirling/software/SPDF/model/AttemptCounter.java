@@ -1,10 +1,11 @@
 package stirling.software.SPDF.model;
+
 public class AttemptCounter {
     private int attemptCount;
     private long lastAttemptTime;
 
     public AttemptCounter() {
-        this.attemptCount = 1;
+        this.attemptCount = 0;
         this.lastAttemptTime = System.currentTimeMillis();
     }
 
@@ -17,11 +18,16 @@ public class AttemptCounter {
         return attemptCount;
     }
 
-    public long getlastAttemptTime() {
+    public long getLastAttemptTime() {
         return lastAttemptTime;
     }
 
-    public boolean shouldReset(long ATTEMPT_INCREMENT_TIME) {
-        return System.currentTimeMillis() - lastAttemptTime > ATTEMPT_INCREMENT_TIME;
+    public boolean shouldReset(long attemptIncrementTime) {
+        return System.currentTimeMillis() - lastAttemptTime > attemptIncrementTime;
+    }
+
+    public void reset() {
+        this.attemptCount = 0;
+        this.lastAttemptTime = System.currentTimeMillis();
     }
 }
